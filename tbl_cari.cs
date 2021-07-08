@@ -53,15 +53,17 @@ namespace garantiTakip
         public Nullable<System.DateTime> YETKİLİDGMTARİH { get; set; }
         public Nullable<int> HIZMETTURU { get; set; }
         public Nullable<int> BASBITTAR { get; set; }
+        public Nullable<int> PersonelYorum { get; set; }
     
         public virtual tbl_baslangicBitisTarih tbl_baslangicBitisTarih { get; set; }
         public virtual tbl_firmaTipi tbl_firmaTipi { get; set; }
         public virtual tbl_hizmetturu tbl_hizmetturu { get; set; }
+        public virtual tbl_personel tbl_personel { get; set; }
         public virtual tbl_sektor tbl_sektor { get; set; }
         public virtual tbl_status tbl_status { get; set; }
         public virtual tbl_Yetkili tbl_Yetkili { get; set; }
+        public virtual tbl_yorum tbl_yorum { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_marka> tbl_marka { get; set; }
-        public virtual tbl_personel tbl_personel { get; set; }
     }
 }

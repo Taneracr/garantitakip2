@@ -27,11 +27,9 @@ namespace garantiTakip
         public string PERSONELTC { get; set; }
         public string PERSONELTEL { get; set; }
         public string PERSONELADRES { get; set; }
-        public Nullable<int> PERSONELYORUM { get; set; }
         public Nullable<bool> PERSONELDURUM { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_cari> tbl_cari { get; set; }
-        public virtual tbl_yorum tbl_yorum { get; set; }
     }
 }
