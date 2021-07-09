@@ -102,7 +102,7 @@ namespace garantiTakip
             txtMail.Text = dataGridView1.CurrentRow.Cells[14].Value.ToString();
             txtUrl.Text = dataGridView1.CurrentRow.Cells[15].Value.ToString();
             comboHizmetturu.Text = (dataGridView1.CurrentRow.Cells[26].Value == null) ? "" : (dataGridView1.CurrentRow.Cells[26].Value.ToString());
-            txtAdresSevk.Text = dataGridView1.CurrentRow.Cells[19].Value.ToString();
+            txtAdresSevk.Text = (dataGridView1.CurrentRow.Cells[19].Value == null) ? "" : (dataGridView1.CurrentRow.Cells[19].Value.ToString());
             txtAdresFatura.Text = dataGridView1.CurrentRow.Cells[18].Value.ToString();
             txtIskonto.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
             txtVergiDaire.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
@@ -352,6 +352,21 @@ namespace garantiTakip
         private void button1_Click(object sender, EventArgs e)
         {
             Listele();
+        }
+
+        private void txtYetkiliTel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txtTel2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
 

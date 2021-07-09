@@ -215,6 +215,7 @@ namespace garantiTakip
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(212, 28);
             this.txtTel.TabIndex = 9;
+            this.txtTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTel_KeyPress);
             // 
             // txtSehir
             // 
@@ -252,11 +253,12 @@ namespace garantiTakip
             // 
             // txtTel2
             // 
-            this.txtTel2.Location = new System.Drawing.Point(454, 179);
+            this.txtTel2.Location = new System.Drawing.Point(454, 180);
             this.txtTel2.MaxLength = 11;
             this.txtTel2.Name = "txtTel2";
             this.txtTel2.Size = new System.Drawing.Size(212, 28);
             this.txtTel2.TabIndex = 11;
+            this.txtTel2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTel2_KeyPress);
             // 
             // label6
             // 
@@ -642,6 +644,7 @@ namespace garantiTakip
             this.txtYetkiliTel.Name = "txtYetkiliTel";
             this.txtYetkiliTel.Size = new System.Drawing.Size(236, 28);
             this.txtYetkiliTel.TabIndex = 11;
+            this.txtYetkiliTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYetkiliTel_KeyPress);
             // 
             // label21
             // 
