@@ -22,8 +22,8 @@ namespace garantiTakip
         // taner811907 computer190781
         // qwerty1907 acar1907881
 
-        bool mailkontrol;
-        bool mailkontrol2;
+
+        bool mailkontrol = false;
 
         public void MailGonder(string mesaj, string from)
         {
@@ -84,9 +84,10 @@ namespace garantiTakip
 
                 if (guun.ToString() == DateTime.Now.Date.Day.ToString() && ay.ToString() == DateTime.Now.Date.Month.ToString())
                 {
-                    comboBox2.Items.Add(item.AD + ": " + item.DGMTARİH);
+                    comboBox2.Items.Add(item.AD);
+                    comboBox5.Items.Add(item.DGMTARİH);
                     comboBox1.Items.Add(item.MAIL);
-                    mailkontrol = true;
+                    
                     //  MailGonder(comboBox1.Items[0].ToString(), comboBox1.Items[0].ToString());
                     // MailGonder(comboBox1.Items[3].ToString(), comboBox1.Items[3].ToString());
 
@@ -110,9 +111,10 @@ namespace garantiTakip
 
                 if (bugunay == ay && islem == 10)
                 {
-                    comboBox3.Items.Add(item.tbl_Yetkili.AD + ": " + item.tbl_baslangicBitisTarih.BİTİSTARİH);
+                    comboBox3.Items.Add(item.tbl_Yetkili.AD + " : " + item.tbl_baslangicBitisTarih.BİTİSTARİH);
+                    
                     comboBox4.Items.Add(item.tbl_Yetkili.MAIL);
-                    mailkontrol2 = true;
+                
                 }
 
                 //comboBox4.Items.Add(db.tbl_cari.Select(x => x.tbl_Yetkili.MAIL).ToString());
@@ -121,38 +123,81 @@ namespace garantiTakip
 
                 // comboBox3.Items.Add(item.BİTİSTARİH);
             }
+       
+
+            //    Doğum günü Mail
+
+           
+                List<tbl_cari> cari = db.tbl_cari.Where(x => x.MailGonderildimi == false).ToList();
+
+                foreach (var item in cari)
+                {
+               
+                   
+                 for (int i = 0; i < comboBox1.Items.Count; i++)
+                  {
+                    if (item.tbl_Yetkili.MAIL == comboBox1.Items[i].ToString())
+                    {
+                        if (item.MailGonderildimi != true)
+                        {
+                            listBox1.Items.Add(comboBox1.Items[i]);
+                            MailGonder(comboBox1.Items[i].ToString(), comboBox1.Items[i].ToString());
+                            item.MailGonderildimi = true;
+                            mailkontrol = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Mailler Zaten gönderildi");
+                            
+                        }             
+                    }
+                    
+                    
+
+                }
+
+                
 
 
 
-            int sayac = 0;
-            for (int i = 0; i < comboBox1.Items.Count; i++)
-            {
-                listBox1.Items.Add(comboBox1.Items[i]);
-                // MailGonder(comboBox1.Items[i].ToString(), comboBox1.Items[i].ToString());
+
+
             }
+            db.SaveChanges();
+           
+      
+            if (mailkontrol == true)
+            {
+                for (int i = 0; i < comboBox1.Items.Count; i++)
+                {
+                    MessageBox.Show("Mail Gönderilenler " + comboBox1.Items[i].ToString());
+
+                }
+            }
+            if (comboBox1.Items.Count == 0 && comboBox2.Items.Count == 0 && comboBox3.Items.Count == 0 && comboBox4.Items.Count == 0 && comboBox5.Items.Count == 0)
+            {
+                MessageBox.Show("Gönderilecek Mail Yok");
+            }
+            else
+            {
+                MessageBox.Show("Mailler Daha Önce Gönderilmiş");
+            }
+
+            
+            
+         
+
+
+            //    Garanti Mail
 
             for (int i = 0; i < comboBox4.Items.Count; i++)
             {
                 listBox2.Items.Add(comboBox4.Items[i]);
-                GarantiMailGonder(comboBox4.Items[i].ToString(), comboBox4.Items[i].ToString());
+           //     GarantiMailGonder(comboBox4.Items[i].ToString(), comboBox4.Items[i].ToString());
+                MessageBox.Show("Mail Gönderilenler", comboBox4.Items[i].ToString());
+
             }
 
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

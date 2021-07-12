@@ -38,11 +38,12 @@ namespace garantiTakip
             this.label4 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +51,7 @@ namespace garantiTakip
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(118, 87);
+            this.label1.Location = new System.Drawing.Point(118, 116);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 17);
             this.label1.TabIndex = 3;
@@ -78,11 +79,10 @@ namespace garantiTakip
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(176, 84);
+            this.comboBox1.Location = new System.Drawing.Point(176, 113);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(200, 24);
             this.comboBox1.TabIndex = 7;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -91,7 +91,6 @@ namespace garantiTakip
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(200, 24);
             this.comboBox2.TabIndex = 8;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox3
             // 
@@ -118,7 +117,6 @@ namespace garantiTakip
             this.button2.TabIndex = 11;
             this.button2.Text = "Gönder";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel1
             // 
@@ -134,6 +132,15 @@ namespace garantiTakip
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(454, 500);
             this.panel1.TabIndex = 12;
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
+            this.listBox2.Location = new System.Drawing.Point(40, 184);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(182, 196);
+            this.listBox2.TabIndex = 12;
             // 
             // label3
             // 
@@ -155,6 +162,7 @@ namespace garantiTakip
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.LightCoral;
+            this.panel2.Controls.Add(this.comboBox5);
             this.panel2.Controls.Add(this.listBox1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -176,14 +184,13 @@ namespace garantiTakip
             this.listBox1.Size = new System.Drawing.Size(188, 196);
             this.listBox1.TabIndex = 9;
             // 
-            // listBox2
+            // comboBox5
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(40, 184);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(182, 196);
-            this.listBox2.TabIndex = 12;
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(255, 71);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(121, 24);
+            this.comboBox5.TabIndex = 10;
             // 
             // FrmMail
             // 
@@ -218,5 +225,6 @@ namespace garantiTakip
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ComboBox comboBox5;
     }
 }

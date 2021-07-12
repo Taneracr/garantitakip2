@@ -54,7 +54,10 @@ namespace garantiTakip
         public Nullable<int> HIZMETTURU { get; set; }
         public Nullable<int> BASBITTAR { get; set; }
         public Nullable<int> PersonelYorum { get; set; }
+        public Nullable<int> ArizaID { get; set; }
+        public Nullable<bool> MailGonderildimi { get; set; }
     
+        public virtual tbl_Ariza tbl_Ariza { get; set; }
         public virtual tbl_baslangicBitisTarih tbl_baslangicBitisTarih { get; set; }
         public virtual tbl_firmaTipi tbl_firmaTipi { get; set; }
         public virtual tbl_hizmetturu tbl_hizmetturu { get; set; }
