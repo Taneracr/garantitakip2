@@ -10,6 +10,32 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="tbl_Ariza">
+    <Key>
+      <PropertyRef Name="IND" />
+    </Key>
+    <Property Name="IND" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CariID" Type="int" />
+    <Property Name="ArızaTanim" Type="nvarchar" MaxLength="100" />
+    <Property Name="MusteriAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="MusteriSoyad" Type="nvarchar" MaxLength="50" />
+    <Property Name="GidilenServisSayisi" Type="int" />
+    <Property Name="ArizaKaynagi" Type="nvarchar" MaxLength="50" />
+    <Property Name="EnSonGidilenServisTarih" Type="date" />
+    <Property Name="MusteriKayitTarih" Type="date" />
+    <Property Name="ArizaKayitTarih" Type="date" />
+    <Property Name="MusteriYorumu" Type="nvarchar" MaxLength="100" />
+    <Property Name="PersonelYorumu" Type="nvarchar" MaxLength="100" />
+    <Property Name="MusteriAktifMi" Type="bit" />
+    <Property Name="MusteriAldigiHizmet" Type="nvarchar" MaxLength="50" />
+    <Property Name="MusteriTelefon" Type="nvarchar" MaxLength="15" />
+    <Property Name="MusteriAdres" Type="nvarchar" MaxLength="250" />
+    <Property Name="ArizaTür" Type="nvarchar" MaxLength="50" />
+    <Property Name="OnarimSüresi" Type="nvarchar" MaxLength="30" />
+    <Property Name="UrunTuru" Type="nvarchar" MaxLength="50" />
+    <Property Name="IstenilenServisTarihi" Type="date" />
+    <Property Name="MusteriTuru" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tbl_baslangicBitisTarih">
     <Key>
       <PropertyRef Name="IND" />
@@ -56,6 +82,10 @@
     <Property Name="YETKİLİDGMTARİH" Type="date" />
     <Property Name="HIZMETTURU" Type="int" />
     <Property Name="BASBITTAR" Type="int" />
+    <Property Name="PersonelYorum" Type="int" />
+    <Property Name="ArizaID" Type="int" />
+    <Property Name="MailGonderildimi" Type="bit" />
+    <Property Name="GarantiMail" Type="bit" />
   </EntityType>
   <EntityType Name="tbl_firmaTipi">
     <Key>
@@ -92,7 +122,6 @@
     <Property Name="PERSONELTC" Type="nvarchar" MaxLength="11" />
     <Property Name="PERSONELTEL" Type="nvarchar" MaxLength="15" />
     <Property Name="PERSONELADRES" Type="nvarchar" MaxLength="250" />
-    <Property Name="PERSONELYORUM" Type="int" />
     <Property Name="PERSONELDURUM" Type="bit" />
   </EntityType>
   <EntityType Name="tbl_sektor">
@@ -218,6 +247,18 @@ warning 6002: The table/view 'stajyer.dbo.ViewCari' does not have a primary key 
     <Property Name="HIZMETTURU" Type="int" />
     <Property Name="BASBITTAR" Type="int" />
   </EntityType>
+  <Association Name="FK_tbl_cari_tbl_Ariza">
+    <End Role="tbl_Ariza" Type="Self.tbl_Ariza" Multiplicity="0..1" />
+    <End Role="tbl_cari" Type="Self.tbl_cari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Ariza">
+        <PropertyRef Name="IND" />
+      </Principal>
+      <Dependent Role="tbl_cari">
+        <PropertyRef Name="ArizaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tbl_cari_tbl_baslangicBitisTarih">
     <End Role="tbl_baslangicBitisTarih" Type="Self.tbl_baslangicBitisTarih" Multiplicity="0..1" />
     <End Role="tbl_cari" Type="Self.tbl_cari" Multiplicity="*" />
@@ -302,6 +343,18 @@ warning 6002: The table/view 'stajyer.dbo.ViewCari' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tbl_cari_tbl_yorum">
+    <End Role="tbl_yorum" Type="Self.tbl_yorum" Multiplicity="0..1" />
+    <End Role="tbl_cari" Type="Self.tbl_cari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_yorum">
+        <PropertyRef Name="IND" />
+      </Principal>
+      <Dependent Role="tbl_cari">
+        <PropertyRef Name="PersonelYorum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tbl_marka_tbl_cari">
     <End Role="tbl_cari" Type="Self.tbl_cari" Multiplicity="0..1" />
     <End Role="tbl_marka" Type="Self.tbl_marka" Multiplicity="*" />
@@ -311,18 +364,6 @@ warning 6002: The table/view 'stajyer.dbo.ViewCari' does not have a primary key 
       </Principal>
       <Dependent Role="tbl_marka">
         <PropertyRef Name="FIRMANO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_personel_tbl_yorum">
-    <End Role="tbl_yorum" Type="Self.tbl_yorum" Multiplicity="0..1" />
-    <End Role="tbl_personel" Type="Self.tbl_personel" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_yorum">
-        <PropertyRef Name="IND" />
-      </Principal>
-      <Dependent Role="tbl_personel">
-        <PropertyRef Name="PERSONELYORUM" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -359,6 +400,7 @@ warning 6002: The table/view 'stajyer.dbo.ViewCari' does not have a primary key 
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="stajyerModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Ariza" EntityType="Self.tbl_Ariza" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_baslangicBitisTarih" EntityType="Self.tbl_baslangicBitisTarih" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_cari" EntityType="Self.tbl_cari" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_firmaTipi" EntityType="Self.tbl_firmaTipi" Schema="dbo" store:Type="Tables" />
@@ -433,6 +475,10 @@ warning 6002: The table/view 'stajyer.dbo.ViewCari' does not have a primary key 
     [ViewCari].[BASBITTAR] AS [BASBITTAR]
     FROM [dbo].[ViewCari] AS [ViewCari]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_tbl_cari_tbl_Ariza" Association="Self.FK_tbl_cari_tbl_Ariza">
+      <End Role="tbl_Ariza" EntitySet="tbl_Ariza" />
+      <End Role="tbl_cari" EntitySet="tbl_cari" />
+    </AssociationSet>
     <AssociationSet Name="FK_tbl_cari_tbl_baslangicBitisTarih" Association="Self.FK_tbl_cari_tbl_baslangicBitisTarih">
       <End Role="tbl_baslangicBitisTarih" EntitySet="tbl_baslangicBitisTarih" />
       <End Role="tbl_cari" EntitySet="tbl_cari" />
@@ -461,13 +507,13 @@ warning 6002: The table/view 'stajyer.dbo.ViewCari' does not have a primary key 
       <End Role="tbl_Yetkili" EntitySet="tbl_Yetkili" />
       <End Role="tbl_cari" EntitySet="tbl_cari" />
     </AssociationSet>
+    <AssociationSet Name="FK_tbl_cari_tbl_yorum" Association="Self.FK_tbl_cari_tbl_yorum">
+      <End Role="tbl_yorum" EntitySet="tbl_yorum" />
+      <End Role="tbl_cari" EntitySet="tbl_cari" />
+    </AssociationSet>
     <AssociationSet Name="FK_tbl_marka_tbl_cari" Association="Self.FK_tbl_marka_tbl_cari">
       <End Role="tbl_cari" EntitySet="tbl_cari" />
       <End Role="tbl_marka" EntitySet="tbl_marka" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_personel_tbl_yorum" Association="Self.FK_tbl_personel_tbl_yorum">
-      <End Role="tbl_yorum" EntitySet="tbl_yorum" />
-      <End Role="tbl_personel" EntitySet="tbl_personel" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

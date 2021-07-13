@@ -350,6 +350,7 @@
     <Property Name="PersonelYorum" Type="Int32" />
     <Property Name="ArizaID" Type="Int32" />
     <Property Name="MailGonderildimi" Type="Boolean" />
+    <Property Name="GarantiMail" Type="Boolean" />
     <NavigationProperty Name="tbl_Ariza" Relationship="stajyerModel.FK_tbl_cari_tbl_Ariza" FromRole="tbl_cari" ToRole="tbl_Ariza" />
     <NavigationProperty Name="tbl_baslangicBitisTarih" Relationship="stajyerModel.FK_tbl_cari_tbl_baslangicBitisTarih" FromRole="tbl_cari" ToRole="tbl_baslangicBitisTarih" />
     <NavigationProperty Name="tbl_firmaTipi" Relationship="stajyerModel.FK_tbl_cari_tbl_firmaTipi" FromRole="tbl_cari" ToRole="tbl_firmaTipi" />

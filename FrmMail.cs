@@ -24,7 +24,7 @@ namespace garantiTakip
 
 
         bool mailkontrol = false;
-
+        bool garantimailkontrol = false;
         public void MailGonder(string mesaj, string from)
         {
 
@@ -42,7 +42,7 @@ namespace garantiTakip
 
         }
 
-        public void GarantiMailGonder(string mesaj , string from)
+        public void GarantiMailGonder(string mesaj, string from)
         {
 
             MailMessage mesajım = new MailMessage();
@@ -87,7 +87,7 @@ namespace garantiTakip
                     comboBox2.Items.Add(item.AD);
                     comboBox5.Items.Add(item.DGMTARİH);
                     comboBox1.Items.Add(item.MAIL);
-                    
+
                     //  MailGonder(comboBox1.Items[0].ToString(), comboBox1.Items[0].ToString());
                     // MailGonder(comboBox1.Items[3].ToString(), comboBox1.Items[3].ToString());
 
@@ -112,9 +112,9 @@ namespace garantiTakip
                 if (bugunay == ay && islem == 10)
                 {
                     comboBox3.Items.Add(item.tbl_Yetkili.AD + " : " + item.tbl_baslangicBitisTarih.BİTİSTARİH);
-                    
+
                     comboBox4.Items.Add(item.tbl_Yetkili.MAIL);
-                
+
                 }
 
                 //comboBox4.Items.Add(db.tbl_cari.Select(x => x.tbl_Yetkili.MAIL).ToString());
@@ -123,19 +123,17 @@ namespace garantiTakip
 
                 // comboBox3.Items.Add(item.BİTİSTARİH);
             }
-       
+
 
             //    Doğum günü Mail
 
-           
-                List<tbl_cari> cari = db.tbl_cari.Where(x => x.MailGonderildimi == false).ToList();
 
-                foreach (var item in cari)
+            List<tbl_cari> cari = db.tbl_cari.Where(x => x.MailGonderildimi == false).ToList();
+
+            foreach (var item in cari)
+            {
+                for (int i = 0; i < comboBox1.Items.Count; i++)
                 {
-               
-                   
-                 for (int i = 0; i < comboBox1.Items.Count; i++)
-                  {
                     if (item.tbl_Yetkili.MAIL == comboBox1.Items[i].ToString())
                     {
                         if (item.MailGonderildimi != true)
@@ -144,59 +142,101 @@ namespace garantiTakip
                             MailGonder(comboBox1.Items[i].ToString(), comboBox1.Items[i].ToString());
                             item.MailGonderildimi = true;
                             mailkontrol = true;
+                           
                         }
                         else
                         {
                             MessageBox.Show("Mailler Zaten gönderildi");
+                            mailkontrol = false;
                             
-                        }             
+                        }
                     }
-                    
-                    
-
                 }
-
-                
-
-
-
-
 
             }
             db.SaveChanges();
-           
-      
+
+
             if (mailkontrol == true)
             {
                 for (int i = 0; i < comboBox1.Items.Count; i++)
                 {
-                    MessageBox.Show("Mail Gönderilenler " + comboBox1.Items[i].ToString());
+                    MessageBox.Show("Doğum günü Maili Gönderilenler " + comboBox1.Items[i].ToString());
 
                 }
+              
             }
-            if (comboBox1.Items.Count == 0 && comboBox2.Items.Count == 0 && comboBox3.Items.Count == 0 && comboBox4.Items.Count == 0 && comboBox5.Items.Count == 0)
+            if (comboBox1.Items.Count == 0)
             {
-                MessageBox.Show("Gönderilecek Mail Yok");
+                MessageBox.Show("Gönderilecek Doğum Günü Maili Yok");
+               
             }
-            else
+            if (mailkontrol == false)
             {
-                MessageBox.Show("Mailler Daha Önce Gönderilmiş");
-            }
+                MessageBox.Show("Doğum Günü Mailleri Daha Önce Gönderilmiş");
 
-            
-            
-         
+            }
+           
+
+
+
 
 
             //    Garanti Mail
 
-            for (int i = 0; i < comboBox4.Items.Count; i++)
-            {
-                listBox2.Items.Add(comboBox4.Items[i]);
-           //     GarantiMailGonder(comboBox4.Items[i].ToString(), comboBox4.Items[i].ToString());
-                MessageBox.Show("Mail Gönderilenler", comboBox4.Items[i].ToString());
+            List<tbl_cari> maill = db.tbl_cari.Where(x => x.GarantiMail == false).ToList();
 
+            foreach (var item in maill)
+            {
+                for (int i = 0; i < comboBox4.Items.Count; i++)
+                {
+                    if (item.tbl_Yetkili.MAIL == comboBox4.Items[i].ToString())
+                    {
+                        if (item.GarantiMail != true)
+                        {
+                            listBox2.Items.Add(comboBox4.Items[i]);
+                            GarantiMailGonder(comboBox4.Items[i].ToString(),comboBox4.Items[i].ToString());
+                            
+                            item.GarantiMail = true;
+                            garantimailkontrol = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Garanti Mailleri Gönderilmiş");
+
+                            garantimailkontrol = false;
+                        }
+
+                    }
+
+                   
+
+                }
+                db.SaveChanges();              
             }
+            if (garantimailkontrol == true)
+            {
+                for (int i = 0; i < comboBox4.Items.Count; i++)
+                {
+                    MessageBox.Show("Garanti Maili Gönderilenler" + comboBox4.Items[i].ToString());
+                }
+
+               
+            }
+
+            if (comboBox4.Items.Count == 0)
+            {
+                MessageBox.Show("Gönderilecek Garanti Maili Yok");
+                return;
+            }
+            if (garantimailkontrol == false)
+            {
+                MessageBox.Show("Garanti Mailleri Zaten Gönderilmiş");
+                return;
+            }
+
+
+
 
         }
     }

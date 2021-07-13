@@ -28,7 +28,7 @@ namespace garantiTakip
                 x.tbl_personel.PERSONELTEL,
                 x.tbl_personel.PERSONELMAİL,
                 x.tbl_personel.PERSONELDURUM, 
-                x.tbl_personel.tbl_yorum.YORUM
+                x.tbl_yorum.YORUM
             }).ToList();
 
         }

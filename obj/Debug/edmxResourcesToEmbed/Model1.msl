@@ -237,6 +237,7 @@
     <EntitySetMapping Name="tbl_cari">
       <EntityTypeMapping TypeName="stajyerModel.tbl_cari">
         <MappingFragment StoreEntitySet="tbl_cari">
+          <ScalarProperty Name="GarantiMail" ColumnName="GarantiMail" />
           <ScalarProperty Name="MailGonderildimi" ColumnName="MailGonderildimi" />
           <ScalarProperty Name="ArizaID" ColumnName="ArizaID" />
           <ScalarProperty Name="PersonelYorum" ColumnName="PersonelYorum" />

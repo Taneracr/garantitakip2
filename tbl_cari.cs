@@ -56,6 +56,7 @@ namespace garantiTakip
         public Nullable<int> PersonelYorum { get; set; }
         public Nullable<int> ArizaID { get; set; }
         public Nullable<bool> MailGonderildimi { get; set; }
+        public Nullable<bool> GarantiMail { get; set; }
     
         public virtual tbl_Ariza tbl_Ariza { get; set; }
         public virtual tbl_baslangicBitisTarih tbl_baslangicBitisTarih { get; set; }
